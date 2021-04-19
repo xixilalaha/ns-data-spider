@@ -5,6 +5,8 @@
 const superagent = require('superagent');
 const cheerio = require('cheerio');
 var async = require('async');
+var fs = require('fs'); // node自带
+const jsonfile = require('jsonfile')
 
 const HKHTMLURL = 'https://store.nintendo.com.hk/games/all-released-games';
 
@@ -54,131 +56,146 @@ function returnIp() {
 
 var concurrencyCount = 0;
 var fetchUrl = function (item) {
- return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     console.log(item, 'items')
     var delay = parseInt((Math.random() * 10000000) % 4000, 10);
     concurrencyCount++;
-    //   console.log('现在的并发数是', concurrencyCount, '，正在抓取的是', url, '，耗时' + delay + '毫秒');
-    // setTimeout(function () {
-      
-    // }, delay);
     let detailUrl = item.url
-      concurrencyCount--;
-      console.log('来过这里',detailUrl,'detailUrl')
+    concurrencyCount--;
+    console.log('来过这里', detailUrl, 'detailUrl')
     superagent.get(detailUrl).set({
-        "User-Agent": randomHead(),
-        "X-Forwarded-For": returnIp()
+      "User-Agent": randomHead(),
+      "X-Forwarded-For": returnIp()
     }).then(res => {
+      console.log('成功了')
       resolve(res)
     }).catch(rej => {
-      reject(rej)
-      })
-    // console.log(xx.statusCode,'xx')
-    // resolve(xx)
+      console.log('失败了')
+      // console.log(rej)
+      resolve(rej)
+    })
   })
- 
+
 };
 
-// function formatHtml(gameList, callback) {
- 
-// }
-let formatHtml = async.mapLimit(gameList, 1,async function (item, callback) {
-  let response = await fetchUrl(item);
-  let temp = []
-  var topicHtml = response.text;
-    if (!topicHtml) {
-      return emptyTemp.push({
-        // detailUrl: detailUrl,
-        desc: '未搜索到信息'
-      });
+function formatHtml(gameList, callback) {
+  return new Promise(async (resolve, reject) => {
+    let xx = await async.mapLimit(gameList, 1, async function (item, callback) {
+      console.log(item, 'item')
+      let response = await fetchUrl(item);
+      if (response.statusCode !== 200) {
+        // return {
+        //   status: response.status,
+        //   name: item.name,
+        //   detailLink:response.req.url
+        // }
+        return response
+      }
+      console.log(response.statusCode, 'statusCode:')
+      var topicHtml = response.text;
+      if (!topicHtml) {
+        return emptyTemp.push({
+          // detailUrl: detailUrl,
+          desc: '未搜索到信息'
+        });
 
-    }
-    var $ = cheerio.load(topicHtml);
-    let name = $("h1 span").text()
-    let productCode = $(".product-add-form form").attr("data-product-sku")
-    let price = ''
-    let specialPrice = ''
-    let specialDate = ''
-    let isSpecial = $(".product-page-info-form .old-price").html()
-    if (isSpecial) {
-      price = $(".old-price .price").html()
-      specialPrice = $(".special-price .price").html()
-      specialDate = $(".special-period").html()
-    } else {
-      price = $(".product-page-info-form .price").html()
-      specialPrice = '暂无优惠'
-      specialDate = '暂无优惠'
-    }
-    let priceCurrency = $("meta[itemprop='priceCurrency']").attr("content")
-    let platform = $(".platform .product-attribute-val").text()
-    let game_category = $(".game_category .product-attribute-val").text()
-    let release_date = $(".release_date .product-attribute-val").text()
-    let publisher = $(".publisher .product-attribute-val").text()
-    let no_of_players = $(".no_of_players .product-attribute-val").text()
-    let supported_languages = $(".supported_languages .product-attribute-val").text()
-    let required_space = $(".required_space .product-attribute-val").text()
-    let supported_controllers = $(".supported_controllers .product-attribute-val").text()
-    let supported_play_modes = $(".supported_play_modes .product-attribute-val").text()
-    temp.push({
-      name,
-      // detailUrl,
-      productCode,
-      priceCurrency,
-      price,
-      specialPrice,
-      specialDate,
-      platform,
-      game_category,
-      release_date,
-      publisher,
-      no_of_players,
-      supported_languages,
-      required_space,
-      supported_controllers,
-      supported_play_modes,
-    });
-  console.log(temp,'temp')
-    callback(null,temp)
-  // console.log(xx,'fetchUrl')
-  // return response.text
-});
+      }
+      var $ = cheerio.load(topicHtml);
+      let name = $("h1 span").text()
+      let productCode = $(".product-add-form form").attr("data-product-sku")
+      let price = ''
+      let specialPrice = ''
+      let specialDate = ''
+      let isSpecial = $(".product-page-info-form .old-price").html()
+      if (isSpecial) {
+        price = $(".old-price .price").html()
+        specialPrice = $(".special-price .price").html()
+        specialDate = $(".special-period").html()
+      } else {
+        price = $(".product-page-info-form .price").html()
+        specialPrice = '暂无优惠'
+        specialDate = '暂无优惠'
+      }
+      let priceCurrency = $("meta[itemprop='priceCurrency']").attr("content")
+      let platform = $(".platform .product-attribute-val").text()
+      let game_category = $(".game_category .product-attribute-val").text()
+      let release_date = $(".release_date .product-attribute-val").text()
+      let publisher = $(".publisher .product-attribute-val").text()
+      let no_of_players = $(".no_of_players .product-attribute-val").text()
+      let supported_languages = $(".supported_languages .product-attribute-val").text()
+      let required_space = $(".required_space .product-attribute-val").text()
+      let supported_controllers = $(".supported_controllers .product-attribute-val").text()
+      let supported_play_modes = $(".supported_play_modes .product-attribute-val").text()
+      let temp = {
+        name,
+        // detailUrl,
+        productCode,
+        priceCurrency,
+        price,
+        specialPrice,
+        specialDate,
+        platform,
+        game_category,
+        release_date,
+        publisher,
+        no_of_players,
+        supported_languages,
+        required_space,
+        supported_controllers,
+        supported_play_modes,
+      }
+      return temp
+    })
+    console.log(xx, 'xx')
+    resolve(xx)
+  })
+
+}
 
 async function requestHKTarget2(url = HKHTMLURL, replaceStr = "發售日期 ", orReplaceStr = '') {
   // console.log(url, 'url')
   const data = [];
-  const data2 = [];
-  await superagent.get(url)
+  await superagent.get(url).set({
+    "User-Agent": randomHead(),
+    "X-Forwarded-For": returnIp()
+  })
     .then(async (res) => {
       const $ = cheerio.load(res.text);
       $('.category-product-item')
         .each((idx, ele) => {
           const url = $(ele).find('.product-list-item').attr("href");
-          data2.push({
+          const name = $(ele).find('.category-product-item-title-link').text().replace(/\n/g,'').trim()
+          data.push({
             url: url,
+            name: name,
           })
         });
     })
     .catch(err => console.log(err, '网页加载错误'));
   console.log('中途执行了一次')
-  let xx = await formatHtml(data2.splice(0, 1))
-  console.log(xx,'let xx')
-  // console.log('此时应该返回数据')
-  // return data
-//   let numPromise = async.mapLimit(['1', '2', '3', '4', '5'], 3, function (num, callback) {
-//     console.log(num,'num')
-//     setTimeout(function(){
-//         num = num * 2,
-//         // console.log(num);
-//         callback(null, num);
-//     }, 
-//     4000);
-// })
-//Promise.all([numPromise]) //Promise.all is not needed
-// let xx = await numPromise
-// // .then((result) => console.log("success:" + result))
-// // .catch(() => console.log("no success"));
-//   console.log(xx,'xx')
-//   return xx
+  let xx = await formatHtml(data)
+  writeJson(xx, `HK.json`)
+  return xx
+}
+/**
+ * 
+ * @param {要写入的数据} data 
+ * @param {文件名} fileName 
+ */
+ function writeJson(data, fileName) {
+  fs.unlink(`./dist/${fileName}`, function (err) {
+      if (err) {
+          console.log('文件删除失败')
+          throw err;
+      }
+      console.log(data, 'data')
+      console.log('文件删除成功')
+      jsonfile.writeFile(`./dist/${fileName}`, data, function (err) {
+          if (err) throw err;
+          console.log('Write to json has finished');
+      });
+  })
+
 }
 
 module.exports = {
