@@ -8,8 +8,11 @@ var async = require('async');
 var fs = require('fs'); // node自带
 const jsonfile = require('jsonfile')
 const download = require('download');
+const {
+  stringify
+} = require('querystring');
 
-const HKHTMLURL = 'https://store.nintendo.com.hk/games/all-released-games';
+const HKHTMLURL = 'https://searching.nintendo-europe.com/{locale}/select';
 
 //浏览器库
 const userAgents = [
@@ -163,7 +166,7 @@ function formatHtml(gameList, callback) {
         supported_play_modes,
         imgList,
         desc,
-        idx:response.idx,
+        idx: response.idx,
       }
       // console.log($("script[type='text/x-magento-init']"), 'script')
 
@@ -174,45 +177,43 @@ function formatHtml(gameList, callback) {
 
 }
 
-async function requestHKTarget2(url = HKHTMLURL, replaceStr = "發售日期 ", orReplaceStr = '') {
+async function requestUKTarget(url = HKHTMLURL, locale = 'en') {
   // console.log(url, 'url')
   const data = [];
-  errorArr = []
-  logArr = []
-  await superagent.get(url).set({
-      "User-Agent": randomHead(),
-      "X-Forwarded-For": returnIp()
-    })
-    .then(async (res) => {
-      const $ = cheerio.load(res.text);
-      console.log($('.category-product-item').length, '长度')
-      $('.category-product-item')
-        .each((idx, ele) => {
-          const url = $(ele).find('.product-list-item').attr("href");
-          const name = $(ele).find('.category-product-item-title-link').text().replace(/\n/g, '').trim()
-          data.push({
-            url: url,
-            name: name,
-            idx: idx,
-          })
-        });
-    })
-    .catch(err => console.log(err, '网页加载错误'));
-  console.log('中途执行了一次')
-  let resultData = await formatHtml(data)
-  if (errorArr.length) {
-    let tempArr = [...errorArr]
-    errorArr = []
-    let secondResult = await formatHtml(tempArr)
-    console.log(secondResult,'secondResult')
-    for (let i in secondResult) {
-      resultData[secondResult[i].idx] = secondResult[i]
-    }
+  let params = {
+    fq: 'type:GAME AND system_type:nintendoswitch* AND product_code_txt:*',
+    q: '*',
+    sort: 'sorting_title asc',
+    start: '0',
+    wt: 'json',
+    rows: 9999
   }
-  writeJson(resultData, `HK.json`)
-  console.log(errorArr,'errorArr')
-  writeJson(errorArr, `HKError.json`)
-  return resultData
+  let xx = await superagent.get(`${url.replace('{locale}', locale)}`).set({
+      "User-Agent": randomHead(),
+      "X-Forwarded-For": returnIp(),
+      'Accept': '*/*',
+      // 'Accept-Encoding': 'utf-8',
+      // 'Connection': 'keep-alive',
+      // 'content-type': 'application/javascript; charset=utf-8',
+    }).accept('application/json')
+    .query(stringify(params))
+    .then(res => {
+      console.log(res, 'res')
+      return res
+    })
+    .catch(err => {
+      console.log(err, '网页加载错误')
+      return err
+    })
+  let jsstr = JSON.stringify(xx.body);
+  let jsondata = JSON.parse(jsstr);
+  let buf = Buffer.from(jsondata);
+  let datas = buf.toString();
+  sx = JSON.parse(datas);
+  console.log(sx);
+
+  writeJson(sx.response.docs, `UK.json`)
+  return sx.response.docs
 }
 /**
  * 
@@ -236,5 +237,5 @@ function writeJson(data, fileName) {
 }
 
 module.exports = {
-  requestHKTarget2
+  requestUKTarget
 };
