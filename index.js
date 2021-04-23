@@ -36,6 +36,7 @@ app.get('/jp', async (req, res) => {
 //美国数据
 app.get('/usa', async (req, res) => {
   const data = await requestUSATarget();
+  console.log(data.length,'data')
   res.send(data);
 });
 //加拿大
