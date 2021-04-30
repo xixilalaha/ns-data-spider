@@ -1,0 +1,354 @@
+{
+    "name": "我的英雄學院 唯我正義2",
+    "nameEn": "AQUA KITTY UDX",
+    "imgList": [{
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/m/h/mhaoj2_1920_1080_herobanner_tc_0117__1__1.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/m/h/mhaoj2_1920_1080_herobanner_tc_0117__1__1.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/m/h/mhaoj2_1920_1080_herobanner_tc_0117__1__1.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "1",
+        "isMain": true,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/1/_/1___cn_1.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/1/_/1___cn_1.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/1/_/1___cn_1.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "2",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/2/_/2_mhaoj2_ss___tc_1.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/2/_/2_mhaoj2_ss___tc_1.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/2/_/2_mhaoj2_ss___tc_1.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "3",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/3/_/3_mhaoj2_ss__d__tc_1.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/3/_/3_mhaoj2_ss__d__tc_1.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/3/_/3_mhaoj2_ss__d__tc_1.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "4",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/4/_/4_mhaoj2_ss___tc.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/4/_/4_mhaoj2_ss___tc.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/4/_/4_mhaoj2_ss___tc.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "5",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/5/_/5_mhaoj2_ss___tc.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/5/_/5_mhaoj2_ss___tc.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/5/_/5_mhaoj2_ss___tc.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "6",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }, {
+        "thumb": "https://store.nintendo.com.hk/media/catalog/product/cache/eac6de58ef33b3149c3b749eed764207/6/_/6_mhaoj2_ss___tc.jpg",
+        "img": "https://store.nintendo.com.hk/media/catalog/product/cache/fbd142b527b990ca39daf426d49f9eed/6/_/6_mhaoj2_ss___tc.jpg",
+        "full": "https://store.nintendo.com.hk/media/catalog/product/cache/65abdec17336d39cdc118c84d300b8a8/6/_/6_mhaoj2_ss___tc.jpg",
+        "caption": "我的英雄學院 唯我正義2",
+        "position": "7",
+        "isMain": false,
+        "type": "image",
+        "videoUrl": null
+    }],
+    "platform": "Nintendo Switch",
+    "required_space": "10.3GB",
+    "game_category": "動作, 格鬥",
+    "no_of_players": "1~4人",
+    "publisher": "BANDAI NAMCO Entertainment",
+    "language": "繁體中文, 日文 , 韓文",
+    "agerating": "PEGI 7",
+    "play_mode_tv_mode_b": true,
+    "play_mode_handheld_mode_b": true,
+    "play_mode_tabletop_mode_b": true,
+    "cloud_saves_b": true,
+    "club_nintendo": false,
+    "compatible_controller": ["nintendoswitch_pro_controller"],
+    "digital_version_b": true,
+    "physical_version_b": false,
+    "desc": "※本商品以外還有「豪華版」供您選購，請小心重複購買。\n \n以「個性」相互較勁的『我的英雄學院』正統對戰動作遊戲登場！\n比獲得好評的「我的英雄學院」對戰動作遊戲前作更加豐富許多，「我的英雄學院 唯我正義2」在Nintendo Switch登場！盡情在關卡奔馳，以來自「個性」的超人力量體驗充滿魄力的戰鬥吧！\n \n※本商品以外還有「豪華版」供您選購，請小心重複購買。\n■數位版特典・燃燒的鬍子　獨特\n■前作購買者特典・綠谷出久　特別自訂道具\n※內容、樣式可能未經告知而有所變更。※數位版特典是永久附屬的特典。※要獲得前作購買者特典，需有Nintendo Switch的「我的英雄學院 唯我正義」保存資料。",
+    "isTotalCh": 1,
+    "currentDiscountRate": " 50% ",
+    "currentLowestPrice": " Mexico ",
+    "currentLowestPriceRegion": "Mexico",
+    "priceArr": [
+        {
+            "region": "Mexico",
+            "priceCNY": " ¥12.44",
+            "price": " ¥12.44",
+            "discountLast": "50%",
+            "discountValue": "On sale until May.  6, 2021"
+        },
+        {
+            "region": "United States",
+            "priceCNY": " ¥12.93",
+            "price": " ¥12.93",
+            "discountLast": "On sale until May.  6, 2021",
+            "discountValue": "On sale until May.  6, 2021"
+        },
+        {
+            "region": "Russia",
+            "priceCNY": " ¥13.01",
+            "price": " ¥13.01",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Canada",
+            "priceCNY": " ¥13.75",
+            "price": " ¥13.75",
+            "discountLast": "On sale until May.  6, 2021",
+            "discountValue": "On sale until May.  6, 2021"
+        },
+        {
+            "region": "Poland",
+            "priceCNY": " ¥13.80",
+            "price": " ¥13.80",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "New Zealand",
+            "priceCNY": " ¥14.90",
+            "price": " ¥14.90",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Australia",
+            "priceCNY": " ¥15.05",
+            "price": " ¥15.05",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Czech Republic",
+            "priceCNY": " ¥15.22",
+            "price": " ¥15.22",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Sweden",
+            "priceCNY": " ¥15.49",
+            "price": " ¥15.49",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Slovenia",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Romania",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Portugal",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Cyprus",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Estonia",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Finland",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "France",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Malta",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Hungary",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Spain",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Ireland",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Italy",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Greece",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Bulgaria",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Luxembourg",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Belgium",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Lithuania",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Austria",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Latvia",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Slovakia",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Germany",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Netherlands",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Norway",
+            "priceCNY": " ¥15.65",
+            "price": " ¥15.65",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Croatia",
+            "priceCNY": " ¥15.64",
+            "price": " ¥15.64",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Denmark",
+            "priceCNY": " ¥15.85",
+            "price": " ¥15.85",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "United Kingdom",
+            "priceCNY": " ¥16.13",
+            "price": " ¥16.13",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "South Africa",
+            "priceCNY": " ¥16.37",
+            "price": " ¥16.37",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Switzerland",
+            "priceCNY": " ¥19.82",
+            "price": " ¥19.82",
+            "discountLast": "On sale until May.  5, 2021",
+            "discountValue": "On sale until May.  5, 2021"
+        },
+        {
+            "region": "Japan",
+            "priceCNY": "¥30.10",
+            "price": "¥30.10"
+        }
+    ],
+}
