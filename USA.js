@@ -11,7 +11,9 @@ const {
   returnIp
 } = require('./util/hideIp')
 const algoliasearch = require('algoliasearch');
-const {writeJson} = require('./util/writeJson')
+const {
+  writeJson
+} = require('./util/writeJson')
 
 const USAGAMEHTMLURL = 'https://www.nintendo.com/games/game-guide/?pv=true'; //页面url
 const USAGAMEURL = 'https://u3b6gr4ua3-dsn.algolia.net/1/indexes/*/queries';
@@ -31,17 +33,16 @@ const US_AVAILABILITY_FILTER = 'availability:Coming soon';
 
 async function requestUSATarget(limit = 250, page = 1, data = [], url = USAGAMEURL, referer = Referer) {
   const formData = {
-    requests: [
-      {
-      indexName: US_INDEX_TITLE_ASC,
-      params: stringify({
-        query: '',
-        hitsPerPage: limit,
-        page,
-        analytics: false,
-        facets: US_FACETS,
-        facetFilters: `[["${US_ESRB_RATINGS_FILTERS.everyone}"],["${US_PLATFORM_FACET_FILTER}"]]`
-      })
+    requests: [{
+        indexName: US_INDEX_TITLE_ASC,
+        params: stringify({
+          query: '',
+          hitsPerPage: limit,
+          page,
+          analytics: false,
+          facets: US_FACETS,
+          facetFilters: `[["${US_ESRB_RATINGS_FILTERS.everyone}"],["${US_PLATFORM_FACET_FILTER}"]]`
+        })
       },
       {
         indexName: US_INDEX_TITLE_DES,
@@ -155,34 +156,19 @@ async function requestUSATarget(limit = 250, page = 1, data = [], url = USAGAMEU
   //   await requestUSATarget(250, page, data)
   // }
   // writeJson(data,'USA.json')
-  var client = algoliasearch('U3B6GR4UA3', '6efbfb0f8f80defc44895018caf77504');
+  var client = algoliasearch('U3B6GR4UA3', 'c4da8be7fd29f0f5bfa42920b0a99dc7');
   console.log('你好')
   //初始化一个索引库
-  var index = client.initIndex('ncom_game_en_us_title_asc');
-  let hits = [];
-
-index
-  .browseObjects({
-    batch: (objects) => {
-      console.log(objects)
-      (hits = hits.concat(objects))
-    },
-    query:formData
+  var index = client.initIndex('ncom_game_en_us');
+  index.setSettings({
+    paginationLimitedTo: 10000
   })
-  .then(() => {
-    console.log('Finished! We got %d hits', hits.length);
-    // fs.writeFile(
-    //   'browse.json',
-    //   JSON.stringify(hits, null, 2),
-    //   'utf-8',
-    //   (err) => {
-    //     if (err) throw err;
-    //     console.log('Your index was successfully exported!');
-    //   }
-    // );
-  }).catch(err => {
-    console.log(err)
+  let xx = await index.search('', {
+    page: 2,
+    hitsPerPage:500
   })
+  
+  return xx
   // index.search({
   //   query: '',
   //   hitsPerPage: limit,
@@ -199,7 +185,7 @@ index
   //     console.log(content.hits);
   //   }
   // );
-  return data
+  // return data
 }
 
 module.exports = {

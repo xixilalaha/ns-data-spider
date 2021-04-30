@@ -25,7 +25,6 @@ const userAgents = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20",
     "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6",
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER",
-    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
     "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; QQBrowser/7.0.3698.400)",
     "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:2.0b13pre) Gecko/20110307 Firefox/4.0b13pre",
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
@@ -57,93 +56,10 @@ function returnIp() {
         Math.floor(Math.random() * (10 - 255) + 255)
     );
 }
-
-var fetchUrl = function (item, callback) {
-    return new Promise((resolve, reject) => {
-        let url = item
-        var delay = parseInt((Math.random() * 10000000) % 10000, 10);
-        console.log(delay, 'delay2')
-        setTimeout(function () {
-            superagent.get(url).timeout({
-                response: 10000, // Wait 5 seconds for the server to start sending,
-                deadline: 60000, // but allow 1 minute for the file to finish loading.
-            }).set({
-                "User-Agent": randomHead(),
-                "X-Forwarded-For": returnIp()
-            }).query({
-                current_page: 1,
-                page_size: 24,
-            }).end(async function (err, sres) {
-                if (err) {
-                    // console.log(err,'err')
-                    // return next(err);
-                    resolve([url, err.text]);
-                    return true
-                }
-                console.log('经过了这里')
-                resolve([url, sres.text]);
-            });
-
-        }, delay);
-    })
-
-};
-var fetchHisPrice = function (item) {
-    return new Promise((resolve, reject) => {
-        let url = item
-        var delay = parseInt((Math.random() * 10000000) % 10000, 10);
-        console.log(delay,'delay3')
-        setTimeout(function () {
-            superagent.get(url).timeout({
-                response: 10000, // Wait 5 seconds for the server to start sending,
-                deadline: 60000, // but allow 1 minute for the file to finish loading.
-            }).set({
-                "User-Agent": randomHead(),
-                "X-Forwarded-For": returnIp()
-            }).end(async function (err, sres) {
-                if (err) {
-                    console.log('err')
-                    // return next(err);
-                    resolve(err);
-                    return true
-                }
-                resolve(sres);
-            });
-
-        }, delay);
-    })
-
-};
-var fetchOriginPrice = function (item) {
-    return new Promise((resolve, reject) => {
-        let url = item
-        var delay = parseInt((Math.random() * 10000000) % 10000, 10);
-        console.log(delay,'delay4')
-        setTimeout(function () {
-            superagent.get(url).timeout({
-                response: 10000, // Wait 5 seconds for the server to start sending,
-                deadline: 60000, // but allow 1 minute for the file to finish loading.
-            }).set({
-                "User-Agent": randomHead(),
-                "X-Forwarded-For": returnIp()
-            }).end(async function (err, sres) {
-                if (err) {
-                    console.log('err')
-                    // return next(err);
-                    resolve(err);
-                    return true
-                }
-                resolve(sres);
-            });
-
-        }, delay);
-    })
-
-};
 var fetchInfoUrl = function (item, callback) {
     return new Promise((resolve, reject) => {
         let searchName = item.nameEn
-        var delay = parseInt((Math.random() * 10000000) % 10000, 10);
+        var delay = parseInt((Math.random() * 10000000) % 20000, 10);
         console.log(delay,'delay')
         setTimeout(function () {
             console.log(searchName, 'searchName')
@@ -174,6 +90,91 @@ var fetchInfoUrl = function (item, callback) {
 
 };
 
+var fetchUrl = function (item, callback) {
+    return new Promise((resolve, reject) => {
+        let url = item
+        var delay = parseInt((Math.random() * 10000000) % 25000, 10);
+        console.log(delay, 'delay2')
+        setTimeout(function () {
+            superagent.get(url).timeout({
+                response: 10000, // Wait 5 seconds for the server to start sending,
+                deadline: 60000, // but allow 1 minute for the file to finish loading.
+            }).set({
+                "User-Agent": randomHead(),
+                "X-Forwarded-For": returnIp()
+            }).query({
+                current_page: 1,
+                page_size: 24,
+            }).end(async function (err, sres) {
+                if (err) {
+                    // console.log(err,'err')
+                    // return next(err);
+                    console.log(err,'err')
+                    resolve([url, err.text]);
+                    return true
+                }
+                console.log('经过了这里')
+                resolve([url, sres.text]);
+            });
+
+        }, delay);
+    })
+
+};
+var fetchHisPrice = function (item) {
+    return new Promise((resolve, reject) => {
+        let url = item
+        var delay = parseInt((Math.random() * 10000000) % 30000, 10);
+        console.log(delay,'delay3')
+        setTimeout(function () {
+            superagent.get(url).timeout({
+                response: 10000, // Wait 5 seconds for the server to start sending,
+                deadline: 60000, // but allow 1 minute for the file to finish loading.
+            }).set({
+                "User-Agent": randomHead(),
+                "X-Forwarded-For": returnIp()
+            }).end(async function (err, sres) {
+                if (err) {
+                    console.log('err')
+                    // return next(err);
+                    resolve(err);
+                    return true
+                }
+                resolve(sres);
+            });
+
+        }, delay);
+    })
+
+};
+var fetchOriginPrice = function (item) {
+    return new Promise((resolve, reject) => {
+        let url = item
+        var delay = parseInt((Math.random() * 10000000) % 35000, 10);
+        console.log(delay,'delay4')
+        setTimeout(function () {
+            superagent.get(url).timeout({
+                response: 10000, // Wait 5 seconds for the server to start sending,
+                deadline: 60000, // but allow 1 minute for the file to finish loading.
+            }).set({
+                "User-Agent": randomHead(),
+                "X-Forwarded-For": returnIp()
+            }).end(async function (err, sres) {
+                if (err) {
+                    console.log('err')
+                    // return next(err);
+                    resolve(err);
+                    return true
+                }
+                resolve(sres);
+            });
+
+        }, delay);
+    })
+
+};
+
+
 function getDiscount(basic, dis) {
     let tBasic = Number(basic.replace('¥', ''))
     let tDis = Number(dis.replace('¥', ''))
@@ -203,42 +204,47 @@ function getData(search) {
 function formatHtml(gameList, callback) {
     return new Promise(async (resolve, reject) => {
         let tempArr = await async.mapLimit(gameList, 1, async function (item, callback) {
-            console.log(item, 'item')
             let topicPair = await fetchUrl(item);
+            // console.log(topicPair,'topicPair')
             // console.log(result,'result');
             console.log('final:');
+            console.log(topicPair[0],'topicPair[0]');
             let tempId = topicPair[0].split('games/')[1].split('-')[0]
             console.log('该进行历史价格请求了')
-            // let price = await superagent.get(`https://charts.eshop-prices.com/prices/${tempId}?currency=CNY`).timeout({
-            //     response: 10000, // Wait 5 seconds for the server to start sending,
-            //     deadline: 60000, // but allow 1 minute for the file to finish loading.
-            // }).set({
-            //     "User-Agent": randomHead(),
-            //     "X-Forwarded-For": returnIp()
-            // })
             let price = await fetchHisPrice(`https://charts.eshop-prices.com/prices/${tempId}?currency=CNY`)
+            console.log(price.status,'price')
+            if (price.status !== 200) {
+                return price
+            }
             let priceArr2 = JSON.parse(price.text).map(item => {
                 return item.value
             })
             console.log('该进行原服价格请求了')
-            // let detail = await superagent.get(`${topicPair[0].replace('?currency=CNY','')}`).timeout({
-            //     response: 10000, // Wait 5 seconds for the server to start sending,
-            //     deadline: 60000, // but allow 1 minute for the file to finish loading.
-            // }).set({
-            //     "User-Agent": randomHead(),
-            //     "X-Forwarded-For": returnIp()
-            // })
-            let detail = await fetchOriginPrice(`${topicPair[0].replace('?currency=CNY','')}`)
+            let detail = await fetchOriginPrice(`${topicPair[0].replace('?currency=CNY', '')}`)
+            console.log(detail.status,'detail')
+            if (detail.status !== 200) {
+                return detail
+            }
             console.log('获取价格')
-            console.log(detail,'detail')
-            let xxPriceArr = []
+            let xxPriceArr = {
+                xxPriceArr: [],
+                lowestPrice: priceArr2[0]
+            }
             var _$ = cheerio.load(detail.text);
-            _$("tbody tr.pointer").each((idx, element) => {
-                let isOnSale = _$(element).find(".price-meta").html().trim()
-                xxPriceArr.push({
+            _$(".prices-table tbody tr.pointer").each((idx, element) => {
+                let isOnSale = _$(element).find(".price-meta").html()?_$(element).find(".price-meta").html().trim():''
+                xxPriceArr.xxPriceArr.push({
+                    region: getZh(_$(element).find("td").eq(1).html().replace(/<[^>]+>/g, "").replace(/\t/g, '').replace(/\n/g, '')),
+                    priceCNY: isOnSale ? _$(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim() : _$(element).find(".price-value").text().replace(/\n/g, '').trim(),
                     price: isOnSale ? _$(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim() : _$(element).find(".price-value").text().replace(/\n/g, '').trim(),
+                    priceBasic: isOnSale ? _$(element).find(".price-value .discounted")[0].children[1].children[0].data.replace(/\n/g, '').trim() : _$(element).find(".price-value").text().replace(/\n/g, '').trim(),
+                    discountLast: isOnSale ? getDate(_$(element).find(".price-meta span").attr("title")).trim() : '暂无优惠',
+                    discountValue: isOnSale ? getDiscount(_$(element).find(".price-value .discounted")[0].children[1].children[0].data.replace(/\n/g, '').trim(), _$(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim()) : '暂无优惠',
                 })
             })
+            if (!topicPair[1]) {
+                return xxPriceArr
+            }
             // 接下来都是 jquery 的用法了
             var $ = cheerio.load(topicPair[1]);
             let demo = {
@@ -256,8 +262,8 @@ function formatHtml(gameList, callback) {
                 priceArr: [],
                 lowestPrice: priceArr2[0]
             }
-            $("tbody tr.pointer").each((idx, element) => {
-                let isOnSale = $(element).find(".price-meta").html().trim()
+            $(".prices-table tbody tr.pointer").each((idx, element) => {
+                let isOnSale = $(element).find(".price-meta").html()?$(element).find(".price-meta").html().trim():''
                 priceArr.priceArr.push({
                     region: getZh($(element).find("td").eq(1).html().replace(/<[^>]+>/g, "").replace(/\t/g, '').replace(/\n/g, '')),
                     priceCNY: isOnSale ? $(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim() : $(element).find(".price-value").text().replace(/\n/g, '').trim(),
@@ -268,7 +274,7 @@ function formatHtml(gameList, callback) {
                 })
             })
             priceArr.priceArr.map((item, index) => {
-                item.price = xxPriceArr[index].price
+                item.price = xxPriceArr.xxPriceArr[index].price
             })
             console.log('结束')
             return priceArr
@@ -320,22 +326,10 @@ function readFileJson() {
 }
 app.get('/', async function (req, res, next) {
     let data = await readFileJson()
-
-    let dataList = await getData([data[0], data[1]])
+    console.log(data.length,'dataLength')
+    let dataList = await getData(data)
     // console.log(dataList,'dataList')
     res.send(dataList)
-    // try {
-    //     let dataList = await fetch('https://eshop-prices.com/games?q=Animal+Pals+Bubble+Pop', {
-    //         headers: {
-    //             cookie :'_ga=GA1.2.1643546862.1613960760; __gads=ID=d5231d6866c891d8-2202d8091ac6008f:T=1613960785:RT=1613960785:S=ALNI_MbVy6ZMnzErQesY6ogYhJqAuJ6Qsg; __cfduid=d081a0e15598485d60802d02943d852cc1619321359; _gid=GA1.2.1748061141.1619493124' 
-    //         }
-    //     });
-    //     let xx = await dataList.text()
-    //     res.send(xx)
-    //   } catch (err) {
-    //     if (/(?:JP_games_request_failed)/i.test(err.toString())) throw new EshopError('Fetching of JP Games failed');
-    //     res.send(err)
-    //   }
 })
 
 app.listen(3001, "127.0.0.1", function () {
