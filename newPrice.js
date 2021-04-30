@@ -62,7 +62,7 @@ var fetchUrl = function (item, callback) {
     return new Promise((resolve, reject) => {
         let url = item
         var delay = parseInt((Math.random() * 10000000) % 10000, 10);
-        console.log(delay, 'delay')
+        console.log(delay, 'delay2')
         setTimeout(function () {
             superagent.get(url).timeout({
                 response: 10000, // Wait 5 seconds for the server to start sending,
@@ -92,6 +92,7 @@ var fetchHisPrice = function (item) {
     return new Promise((resolve, reject) => {
         let url = item
         var delay = parseInt((Math.random() * 10000000) % 10000, 10);
+        console.log(delay,'delay3')
         setTimeout(function () {
             superagent.get(url).timeout({
                 response: 10000, // Wait 5 seconds for the server to start sending,
@@ -117,6 +118,7 @@ var fetchOriginPrice = function (item) {
     return new Promise((resolve, reject) => {
         let url = item
         var delay = parseInt((Math.random() * 10000000) % 10000, 10);
+        console.log(delay,'delay4')
         setTimeout(function () {
             superagent.get(url).timeout({
                 response: 10000, // Wait 5 seconds for the server to start sending,
@@ -142,6 +144,7 @@ var fetchInfoUrl = function (item, callback) {
     return new Promise((resolve, reject) => {
         let searchName = item.nameEn
         var delay = parseInt((Math.random() * 10000000) % 10000, 10);
+        console.log(delay,'delay')
         setTimeout(function () {
             console.log(searchName, 'searchName')
             superagent.get('https://eshop-prices.com/games').timeout({
@@ -204,10 +207,6 @@ function formatHtml(gameList, callback) {
             let topicPair = await fetchUrl(item);
             // console.log(result,'result');
             console.log('final:');
-            let temp = []
-            let emptyTemp = []
-            console.log(item, 'item')
-            console.log(topicPair[0], 'topicPair')
             let tempId = topicPair[0].split('games/')[1].split('-')[0]
             console.log('该进行历史价格请求了')
             // let price = await superagent.get(`https://charts.eshop-prices.com/prices/${tempId}?currency=CNY`).timeout({
@@ -231,6 +230,7 @@ function formatHtml(gameList, callback) {
             // })
             let detail = await fetchOriginPrice(`${topicPair[0].replace('?currency=CNY','')}`)
             console.log('获取价格')
+            console.log(detail,'detail')
             let xxPriceArr = []
             var _$ = cheerio.load(detail.text);
             _$("tbody tr.pointer").each((idx, element) => {

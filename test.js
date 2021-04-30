@@ -7,7 +7,10 @@ const cheerio = require('cheerio');
 var async = require('async');
 var fs = require('fs'); // node自带
 const jsonfile = require('jsonfile')
+<<<<<<< HEAD
 const {writeJson} = require('./util/writeJson')
+=======
+>>>>>>> 75c92ab5068a3fb60908aa2271d1f1884d735637
 
 
 function getUSAJson() {

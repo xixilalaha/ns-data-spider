@@ -124,6 +124,7 @@ async function requestUSATarget(limit = 250, page = 1, data = [], url = USAGAMEU
   };
   let total = 0;
   console.log(url, 'url')
+<<<<<<< HEAD
   // await superagent.post(url).set({
   //     "User-Agent": randomHead(),
   //     "X-Forwarded-For": returnIp()
@@ -199,6 +200,39 @@ index
   //     console.log(content.hits);
   //   }
   // );
+=======
+  await superagent.post(url).set({
+      "User-Agent": randomHead(),
+      "X-Forwarded-For": returnIp()
+    })
+    .query({
+      "Content-Type": 'application/json',
+      "x-algolia-application-id": "U3B6GR4UA3",
+      "x-algolia-api-key": "c4da8be7fd29f0f5bfa42920b0a99dc7"
+    })
+    .send(formData)
+    .then(res => {
+      console.log(res.body, 'res')
+      const {
+        results
+      } = res.body;
+      const {
+        hits,
+        nbPages
+      } = results[0];
+      page += 1;
+      total = nbPages;
+      data.push(...hits);
+    })
+    .catch(err => {
+      console.log(err.response)
+      return err
+    });
+  if (total >= page) {
+    await requestUSATarget(250, page, data)
+  }
+  writeJson(data,'USA.json')
+>>>>>>> 75c92ab5068a3fb60908aa2271d1f1884d735637
   return data
 }
 
