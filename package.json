@@ -8,6 +8,7 @@
     "got": "^11.8.2",
     "jsonfile": "^6.1.0",
     "node-fetch": "^2.6.1",
+    "node-xlsx": "^0.16.1",
     "querystring": "^0.2.1",
     "superagent": "^5.2.1",
     "superagent-proxy": "^2.1.0"

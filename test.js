@@ -28,7 +28,9 @@ function getUKJson() {
 
 async function compareJSON() {
   let usa = await getUSAJson()
+  console.log(usa.length,'美服长度')
   let uk = await getUKJson()
+  console.log(uk.length,'欧服长度')
   let usaTitles = usa.map(item => {
     return item.title
   })
@@ -76,7 +78,7 @@ async function compareJSON() {
   tempUk = tempUk.filter(item => {
     return item
   })
-  console.log(exitArr.length,'exitArr')
+  // console.log(exitArr.length,'exitArr')
   // writeJson(exitArr,'ukUsa.json')
   // writeJson(tempUk,'tempUk.json')
 }

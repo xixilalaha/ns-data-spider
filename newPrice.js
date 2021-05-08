@@ -59,7 +59,7 @@ function returnIp() {
 var fetchInfoUrl = function (item, callback) {
     return new Promise((resolve, reject) => {
         let searchName = item.nameEn
-        var delay = parseInt((Math.random() * 10000000) % 20000, 10);
+        var delay = parseInt((Math.random() * 10000000) % 6000, 10);
         console.log(delay,'delay')
         setTimeout(function () {
             console.log(searchName, 'searchName')
@@ -93,7 +93,7 @@ var fetchInfoUrl = function (item, callback) {
 var fetchUrl = function (item, callback) {
     return new Promise((resolve, reject) => {
         let url = item
-        var delay = parseInt((Math.random() * 10000000) % 25000, 10);
+        var delay = parseInt((Math.random() * 10000000) % 8000, 10);
         console.log(delay, 'delay2')
         setTimeout(function () {
             superagent.get(url).timeout({
@@ -124,7 +124,7 @@ var fetchUrl = function (item, callback) {
 var fetchHisPrice = function (item) {
     return new Promise((resolve, reject) => {
         let url = item
-        var delay = parseInt((Math.random() * 10000000) % 30000, 10);
+        var delay = parseInt((Math.random() * 10000000) % 9000, 10);
         console.log(delay,'delay3')
         setTimeout(function () {
             superagent.get(url).timeout({
@@ -150,7 +150,7 @@ var fetchHisPrice = function (item) {
 var fetchOriginPrice = function (item) {
     return new Promise((resolve, reject) => {
         let url = item
-        var delay = parseInt((Math.random() * 10000000) % 35000, 10);
+        var delay = parseInt((Math.random() * 10000000) % 10000, 10);
         console.log(delay,'delay4')
         setTimeout(function () {
             superagent.get(url).timeout({
@@ -187,15 +187,16 @@ function getDiscount(basic, dis) {
 function getData(search) {
     console.log('开始运行')
     return new Promise(async (resolve, reject) => {
-        let dataList = await async.mapLimit(search, 1, async function (item, callback) {
+        await async.mapLimit(search, 1, async function (item, callback) {
             let result = await fetchInfoUrl(item, callback)
             // return result
             // console.log(result, 'result')
             let dataLists = await formatHtml(result)
             // resolve(dataList)
-            return dataLists
+            // return dataLists
+            resolve(dataLists)
         })
-        resolve(dataList)
+        
 
     })
 
@@ -219,6 +220,7 @@ function formatHtml(gameList, callback) {
             let priceArr2 = JSON.parse(price.text).map(item => {
                 return item.value
             })
+            priceArr2 = priceArr2.sort()
             console.log('该进行原服价格请求了')
             let detail = await fetchOriginPrice(`${topicPair[0].replace('?currency=CNY', '')}`)
             console.log(detail.status,'detail')
@@ -260,7 +262,10 @@ function formatHtml(gameList, callback) {
             }
             let priceArr = {
                 priceArr: [],
-                lowestPrice: priceArr2[0]
+                lowestPrice: priceArr2[0],
+                currentDiscountRate:'',
+                currentLowestPrice:'',
+                currentLowestPriceRegion:'',
             }
             $(".prices-table tbody tr.pointer").each((idx, element) => {
                 let isOnSale = $(element).find(".price-meta").html()?$(element).find(".price-meta").html().trim():''
@@ -269,13 +274,20 @@ function formatHtml(gameList, callback) {
                     priceCNY: isOnSale ? $(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim() : $(element).find(".price-value").text().replace(/\n/g, '').trim(),
                     price: isOnSale ? $(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim() : $(element).find(".price-value").text().replace(/\n/g, '').trim(),
                     priceBasic: isOnSale ? $(element).find(".price-value .discounted")[0].children[1].children[0].data.replace(/\n/g, '').trim() : $(element).find(".price-value").text().replace(/\n/g, '').trim(),
-                    discountLast: isOnSale ? getDate($(element).find(".price-meta span").attr("title")).trim() : '暂无优惠',
-                    discountValue: isOnSale ? getDiscount($(element).find(".price-value .discounted")[0].children[1].children[0].data.replace(/\n/g, '').trim(), $(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim()) : '暂无优惠',
+                    discountLast: isOnSale ? getDate($(element).find(".price-meta span").attr("title")).trim() : '',
+                    discountValue: isOnSale ? getDiscount($(element).find(".price-value .discounted")[0].children[1].children[0].data.replace(/\n/g, '').trim(), $(element).find(".price-value .discounted")[0].children[2].data.replace(/\n/g, '').trim()) : 10,
                 })
             })
             priceArr.priceArr.map((item, index) => {
                 item.price = xxPriceArr.xxPriceArr[index].price
             })
+            let tempJson = priceArr.priceArr[0]
+            let tempCNY = Number(tempJson.priceCNY.replace("¥",'')) * 1000
+            let tempBasic = Number(tempJson.priceBasic.replace("¥",'')) * 1000
+            priceArr.currentDiscountRate = (1 - ((tempBasic - tempCNY) / tempBasic))*10
+            priceArr.currentLowestPrice = tempJson.priceCNY
+            priceArr.currentLowestPriceRegion = tempJson.region
+            priceArr.isLowestPrice = (tempCNY - priceArr.lowestPrice) > 0?0:1
             console.log('结束')
             return priceArr
 
@@ -319,7 +331,7 @@ function writeJson(data, fileName) {
 
 function readFileJson() {
     return new Promise((resolve, reject) => {
-        jsonfile.readFile('./dist/infoFinal.json')
+        jsonfile.readFile('./dist/infoFinal2.json')
             .then(obj => resolve(obj))
             .catch(error => reject(error))
     })
@@ -328,8 +340,13 @@ app.get('/', async function (req, res, next) {
     let data = await readFileJson()
     console.log(data.length,'dataLength')
     let dataList = await getData(data)
+    data[0].currentDiscountRate = dataList[0].currentDiscountRate
+    data[0].currentLowestPrice = dataList[0].currentLowestPrice
+    data[0].currentLowestPriceRegion = dataList[0].currentLowestPriceRegion
+    data[0].priceArr = dataList[0].priceArr
+    data[0].isLowestPrice = dataList[0].isLowestPrice
     // console.log(dataList,'dataList')
-    res.send(dataList)
+    res.send(data)
 })
 
 app.listen(3001, "127.0.0.1", function () {

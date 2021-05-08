@@ -3,6 +3,9 @@ const {requestHKTarget2} = require('./HK2');
 const {requestUKTarget} = require('./UK');
 const {requestJPTarget} = require('./JP');
 const {requestUSATarget} = require('./USA');
+const {requestUSATarget2} = require('./USA2');
+const {requestUSATarget3} = require('./USA3');
+const {requestUSATarget4} = require('./USA4');
 const {requestCATarget} = require('./CA');
 const {requestBRTarget}  = require('./BR');
 const {requestCOTarget}  = require('./CO');
@@ -36,6 +39,24 @@ app.get('/jp', async (req, res) => {
 //美国数据
 app.get('/usa', async (req, res) => {
   const data = await requestUSATarget();
+  console.log(data.length,'data')
+  res.send(data);
+});
+//美国数据
+app.get('/usa2', async (req, res) => {
+  const data = await requestUSATarget2();
+  console.log(data.length,'data')
+  res.send(data);
+});
+//美国数据
+app.get('/usa3', async (req, res) => {
+  const data = await requestUSATarget3();
+  console.log(data.length,'data')
+  res.send(data.splice(0,100));
+});
+//美国数据
+app.get('/usa4', async (req, res) => {
+  const data = await requestUSATarget4();
   console.log(data.length,'data')
   res.send(data);
 });
