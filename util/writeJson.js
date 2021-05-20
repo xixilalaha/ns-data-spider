@@ -9,24 +9,24 @@ const jsonfile = require('jsonfile')
  */
 function writeJson(data, fileName) {
   return new Promise((resolve, reject) => {
-    fs.access(`../dist/${fileName}`, function (err) {
+    fs.access(`../price/switch/${fileName}`, function (err) {
       if (err) {
           console.log('不存在该文件')
           console.log(fileName)
-          fs.writeFileSync(`./dist/${fileName}`,'')
-          jsonfile.writeFile(`./dist/${fileName}`, data, function (err) {
+          fs.writeFileSync(`./price/switch/${fileName}`,'')
+          jsonfile.writeFile(`./price/switch/${fileName}`, data, function (err) {
               if (err) throw err;
               console.log('Write to json has finished');
               resolve()
             });
             return
       }
-      fs.unlink(`./dist/${fileName}`, function (err) {
+      fs.unlink(`./price/${fileName}`, function (err) {
           if (err) {
             console.log('文件删除失败')
             throw err;
           }
-          jsonfile.writeFile(`./dist/${fileName}`, data, function (err) {
+          jsonfile.writeFile(`./price/switch/${fileName}`, data, function (err) {
             if (err) throw err;
             console.log('Write to json has finished');
             resolve()

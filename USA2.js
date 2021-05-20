@@ -20,23 +20,13 @@ const USAGAMEURL = 'https://u3b6gr4ua3-dsn.algolia.net/1/indexes/*/queries';
 
 const Referer = "https://www.nintendo.com/games/game-guide/?pv=true";
 const US_FACETS = ["generalFilters", "platform", "availability", "genres", "howToShop", "virtualConsole", "franchises", "priceRange", "esrbRating", "playerFilters"]
-const US_INDEX_TITLE_ASC = 'ncom_game_en_us_title_asc';
-const US_INDEX_TITLE_DES = 'ncom_game_en_us_title_des';
-const US_ESRB_RATINGS_FILTERS = {
-  everyone: 'esrbRating:Everyone',
-  everyone10: 'esrbRating:Everyone 10+',
-  teen: 'esrbRating:Teen',
-  mature: 'esrbRating:Mature'
-};
-const US_PLATFORM_FACET_FILTER = 'platform:Nintendo Switch';
-const US_AVAILABILITY_FILTER = 'availability:Coming soon';
 
-async function requestUSATarget2(limit = 250, page = 1, data = [], url = USAGAMEURL, referer = Referer) {
+async function requestUSATarget2( query = 'Zumba® Burn It Up!',indexName = 'ncom_game_en_us',page = 0, data = [], url = USAGAMEURL) {
   const formData = {
     requests: [{
-        indexName: 'ncom_game_en_us',
+        indexName: indexName,
         params: stringify({
-          query: '',
+          query,
           hitsPerPage: 42,
           maxValuesPerFacet: 30,
           page,

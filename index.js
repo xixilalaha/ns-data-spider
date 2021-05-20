@@ -7,6 +7,7 @@ const {requestUSATarget2} = require('./USA2');
 const {requestUSATarget3} = require('./USA3');
 const {requestUSATarget4} = require('./USA4');
 const {requestCATarget} = require('./CA');
+const {requestLATarget} = require('./LA');
 const {requestBRTarget}  = require('./BR');
 const {requestCOTarget}  = require('./CO');
 const {requestARTarget}  = require('./AR');
@@ -30,9 +31,9 @@ app.get('/hk2', async (req, res) => {
   const data = await requestHKTarget2();
   res.send(data);
 });
-//日本数据
+//日本
 app.get('/jp', async (req, res) => {
-  const data = await requestJPTarget();
+  const data = await requestJPTarget(undefined,undefined,undefined,'Kingdom Rush - タワーディフェンス');
   console.log(data.length);
   res.send(data.splice(0,100));
 });
@@ -63,6 +64,11 @@ app.get('/usa4', async (req, res) => {
 //加拿大
 app.get('/ca',async (req,res) => {
   const data = await requestCATarget();
+  res.send(data);
+});
+//墨西哥
+app.get('/la',async (req,res) => {
+  const data = await requestLATarget();
   res.send(data);
 });
 //巴西
@@ -100,3 +106,9 @@ app.get('/uk',async (req,res) => {
   const data = await requestUKTarget();
   res.send(data);
 });
+//汇总
+app.get('/total', async (req, res) => {
+  let nameArr = ["Zumba® Burn It Up!","Zumba® Burn It Up!","Zumba® Burn It Up!","Zumba® Burn It Up!","Zumba®de Fat Burning！","Zumba Burn It Up!","Zumba® Burn It Up!","Zumba® Burn It Up!"]
+  const data = await requestUKTarget();
+  res.send(data);
+})

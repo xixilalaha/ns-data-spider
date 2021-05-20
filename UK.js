@@ -176,17 +176,83 @@ function formatHtml(gameList, callback) {
   })
 
 }
+let nameArr = ['Zumba® Burn It Up!']
 
 async function requestUKTarget(url = HKHTMLURL, locale = 'en') {
   // console.log(url, 'url')
+
+  // async function getNameInfo(name) {
+  //   return new Promise(async (resolve, reject) => {
+  //     var delay = parseInt((Math.random() * 10000000) % 1000, 10);
+  //       console.log(delay,'delay')
+  //     setTimeout(async function() {
+  //       let params = {
+  //         fq: 'type:GAME AND system_type:nintendoswitch* AND product_code_txt:*',
+  //         q: name,
+  //         sort: 'score desc, date_from desc',
+  //         start: '0',
+  //         wt: 'json',
+  //         rows: 1
+  //       }
+  //       try {
+  //         let xx2 = await superagent.get(`${url.replace('{locale}', locale)}`).set({
+  //           "User-Agent": randomHead(),
+  //           "X-Forwarded-For": returnIp(),
+  //           'Accept': '*/*',
+  //         }).accept('application/json')
+  //         .query(stringify(params))
+  //         .then(res => {
+  //           return res
+  //         })
+  //         .catch(err => {
+  //           console.log(err, '网页加载错误')
+  //           return err
+  //         })
+  //       let jsstr = JSON.stringify(xx2.body);
+  //       let jsondata = JSON.parse(jsstr);
+  //       let buf = Buffer.from(jsondata);
+  //       let datas = buf.toString();
+  //       sx = JSON.parse(datas);
+  //       console.log(sx.response.docs.length,'sx.response.docs')
+  //         if (sx.response.docs.length) {
+  //           resolve(...sx.response.docs)
+  //         } else {
+  //           resolve({
+  //             title:'查询不到该游戏'
+  //           })
+  //       }
+        
+  //       } catch (err) {
+  //         console.log(err,'err')
+  //         resolve({title:'报错了'})
+  //       }
+        
+  //     },delay)
+      
+  //     // writeJson(sx.response.docs, `UK.json`)
+  //     // return sx.response.docs
+  //   })
+  // }
+  // let nameArr2 = []
+  // for (let i in nameArr) {
+  //   // console.log(i)
+  //   let xx3 = await getNameInfo(nameArr[i])
+  //   nameArr2 = xx3
+  //     // console.log(xx3.title)
+  //     // nameArr2.push({
+  //     //   origin: nameArr[i],
+  //     //   searchName: xx3.title
+  //     // })
+  // }
+  // return nameArr2
   const data = [];
   let params = {
     fq: 'type:GAME AND system_type:nintendoswitch* AND product_code_txt:*',
-    q: '*',
-    sort: 'sorting_title asc',
+    q: "*",
+    sort: 'score desc, date_from desc',
     start: '0',
     wt: 'json',
-    rows: 9999
+    rows: 100
   }
   let xx = await superagent.get(`${url.replace('{locale}', locale)}`).set({
       "User-Agent": randomHead(),
@@ -212,7 +278,7 @@ async function requestUKTarget(url = HKHTMLURL, locale = 'en') {
   sx = JSON.parse(datas);
   console.log(sx);
 
-  writeJson(sx.response.docs, `UK.json`)
+  // writeJson(sx.response.docs, `UK.json`)
   return sx.response.docs
 }
 /**

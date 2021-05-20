@@ -269,8 +269,9 @@ async function requestUSATarget4() {
     }
   }
   console.log(existArr.length,'existArr')
-  await writeJson(existArr, `NUSAExistArr.json`)
-  return existArr
+  // await writeJson(existArr, `NUSAExistArr.json`)
+  await writeJson(err, `NUSAExistErrArr.json`)
+  return err
 }
 
 function readFileJson(i) {
